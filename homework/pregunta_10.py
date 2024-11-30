@@ -4,9 +4,14 @@ datos requeridos se encuentran en los archivos `tbl0.tsv`, `tbl1.tsv` y
 `tbl2.tsv`. En este laboratorio solo puede utilizar las funciones y 
 librerias de pandas para resolver las preguntas.
 """
-
+import pandas as pd
 
 def pregunta_10():
+    x10=pd.read_csv('files/input/tbl0.tsv',delimiter='\t')
+    x10=x10.groupby('c1')['c2'].agg(lambda x: ':'.join(map(str, sorted(x))))
+    new_df = x10.reset_index()
+    new_df.set_index("c1", inplace=True)
+    return new_df
     """
     Construya una tabla que contenga `c1` y una lista separada por ':' de los
     valores de la columna `c2` para el archivo `tbl0.tsv`.
